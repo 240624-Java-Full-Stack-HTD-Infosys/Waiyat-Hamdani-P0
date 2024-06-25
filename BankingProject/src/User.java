@@ -1,9 +1,5 @@
 public class User {
-    enum TypeUser{
-        GUESS,
-        CLIENT,
-        ADMIN
-        }
+
 
     private String Firstname;
     private String Lastname;
