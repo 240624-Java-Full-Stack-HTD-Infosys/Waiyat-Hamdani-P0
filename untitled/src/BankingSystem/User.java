@@ -1,10 +1,9 @@
 package BankingSystem;
-import java.util.HashMap;
 
 public class User {
     enum TypeUser{
         GUESS,
-        CurrentUser
+        CLIENT
     }
 
     private String Firstname;
