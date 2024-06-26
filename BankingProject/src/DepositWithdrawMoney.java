@@ -3,15 +3,23 @@ public class DepositWithdrawMoney {
     private static double finalmoney;
 
     public double DepositMoney(double current ,double insert){
-        if(insert > 0) {
-            finalmoney = current + insert;
-        }
+       try {
+           if (insert > 0) {
+               finalmoney = current + insert;
+           }
+       }catch(Exception e){
+           System.out.println("Error message:" +e);
+       }
         return finalmoney;
     }
 
     public double WithdrawMoney(double current, double take){
-        if(insert >0){
-            finalmoney = current - insert;
+        try {
+            if (take > 0) {
+                finalmoney = current - take;
+            }
+        }catch(Exception e) {
+            System.out.println("Error message:" +e);
         }
         return finalmoney;
     }
@@ -24,5 +32,5 @@ public class DepositWithdrawMoney {
     public static void setCurrentMoney(double currentMoney) {
         DepositWithdrawMoney.currentMoney = currentMoney;
     }
-    
+
 }
