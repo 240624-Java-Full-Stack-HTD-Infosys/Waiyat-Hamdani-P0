@@ -1,3 +1,5 @@
+package com.revature.banking;
+
 public class DepositWithdrawMoney {
     private static double currentMoney;
     private static double finalmoney;
