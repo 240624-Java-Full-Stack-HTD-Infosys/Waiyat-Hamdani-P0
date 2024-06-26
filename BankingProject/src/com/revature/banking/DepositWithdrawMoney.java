@@ -31,8 +31,11 @@ public class DepositWithdrawMoney {
         return currentMoney;
     }
 
-    public static void setCurrentMoney(double currentMoney) {
-        DepositWithdrawMoney.currentMoney = currentMoney;
+    public static void setCurrentMoney(double cm) {
+        currentMoney = cm;
     }
 
+    public static double getFinalmoney() {
+        return finalmoney;
+    }
 }
