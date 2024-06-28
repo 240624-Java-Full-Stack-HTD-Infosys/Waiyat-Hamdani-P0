@@ -61,18 +61,22 @@ public class SqlLiteCRUD implements DAO<User,Integer>{
             //System.out.println(rs);
             while (rs.next()) {
                 client = new User();
-               // client.setUserId(rs.getInt(1));
-                System.out.println("Routing number : "+rs.getInt(1));
-                //client.setName(rs.getString("Name"));
-                System.out.println("Name: " +rs.getString("Name"));
-                //client.setTypeUser(rs.getString("TypeOfUser"));
-                System.out.println("type of user: " +rs.getString("TypeOfUser"));
-                //client.setBalance(rs.getInt("Balance"));
-                System.out.println("balance: $" +rs.getInt("Balance"));
-                //client.setBalance(rs.getString("Address"));
-                System.out.println("Address: " +rs.getString("Address"));
-                //client.setEmail(rs.getString("Email"));
-                System.out.println("Email: " +rs.getString("Email"));
+                client.setUserId(rs.getInt(1));
+                //System.out.println("Routing number : "+rs.getInt(1));
+                client.setName(rs.getString("Name"));
+                //System.out.println("Name: " +rs.getString("Name"));
+                client.setTypeUser(rs.getString("TypeOfUser"));
+                //System.out.println("type of user: " +rs.getString("TypeOfUser"));
+                client.setEmail(rs.getString("Email"));
+                // System.out.println("Email: " +rs.getString("Email"));
+                client.setAddress(rs.getString("Address"));
+                //System.out.println("Address: " +rs.getString("Address"));
+                client.setPhone(rs.getString("Phone"));
+                //System.out.println("Address: " +rs.getString("Phone"));
+                client.setBalance(rs.getDouble("Balance"));
+                //System.out.println("balance: $" +rs.getInt("Balance"));
+
+
 
             }
         }catch(Exception e){
@@ -93,7 +97,42 @@ public class SqlLiteCRUD implements DAO<User,Integer>{
 
     @Override
     public boolean update(User user) {
-        return false;
+        boolean isCreated=false;
+        try{
+            conn = DriverManager.getConnection(url);
+            Statement stmt = conn.createStatement();
+            String query="UPDATE BankingWaiyatSystem set Name = ?  "
+                    + ", Email = ? "
+                    + ", Address = ? "
+                    + ", Phone = ? "
+                    + ", Balance = ? " + user.getBalance()
+                    + "WHERE Id = ? " ;
+            CallableStatement cs = conn.prepareCall( query );
+            cs.setString(1, user.getName());
+            cs.setString(2, user.getEmail());
+            cs.setString(3, user.getAddress());
+            cs.setString(4, user.getPhone());
+            cs.setDouble(5,user.getBalance());
+            cs.setInt(6,user.getUserId());
+            int affectedRows=cs.executeUpdate();
+            if(affectedRows ==1) {
+                isCreated = true;
+            }
+
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    System.out.println("sql close");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return isCreated;
     }
 
     @Override
