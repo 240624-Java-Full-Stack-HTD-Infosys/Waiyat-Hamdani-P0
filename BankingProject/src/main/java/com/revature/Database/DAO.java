@@ -7,6 +7,5 @@ public interface DAO <T, U>{
     T read(U u);
     boolean update(T t);
     boolean delete(U u);
-    List<T> readall();
 
 }

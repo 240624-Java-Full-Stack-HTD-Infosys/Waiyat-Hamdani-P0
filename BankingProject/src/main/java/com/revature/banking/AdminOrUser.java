@@ -1,7 +1,6 @@
 package com.revature.banking;
 
-public enum AdminOrUserOrGuest {
-    GUESS,
+public enum AdminOrUser {
     CLIENT,
     ADMIN
 }
