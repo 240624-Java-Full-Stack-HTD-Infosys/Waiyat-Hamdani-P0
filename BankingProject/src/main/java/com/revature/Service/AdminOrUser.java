@@ -1,4 +1,4 @@
-package com.revature.banking;
+package com.revature.Service;
 
 public enum AdminOrUser {
     CLIENT,

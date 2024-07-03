@@ -1,4 +1,4 @@
-package com.revature.banking;
+package com.revature.Service;
 
 public class DepositWithdrawMoney {
     private static double currentMoney;
