@@ -13,14 +13,14 @@ import java.util.Properties;
 
 public class postgresCRUD {
 
-    public static Connection conn ;
-    private static Properties DB_PROPERTIES;
 
+    private static Properties DB_PROPERTIES;
+    private static Connection conn;
     private static String URL;
     private static String USERNAME;
     private static String PASSWORD;
 
-    public postgresCRUD(){
+    public postgresCRUD() throws ClassNotFoundException, SQLException {
         //---------------------------------local database---------------------------------------------------------------------
         // InputStream inputStream = postgresCRUD.class.getClassLoader().getResourceAsStream("databaseLocale.properties");
 
@@ -33,44 +33,22 @@ public class postgresCRUD {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        URL = (String)DB_PROPERTIES.get("url");
+        USERNAME = (String) DB_PROPERTIES.get("uname");
+        PASSWORD = (String) DB_PROPERTIES.get("pwd");
     }
 
 
     public static Connection myConnection() throws SQLException, IOException, ClassNotFoundException {
-        URL = (String)DB_PROPERTIES.get("url");
-        USERNAME = (String) DB_PROPERTIES.get("uname");
-        PASSWORD = (String) DB_PROPERTIES.get("pwd");
-
-
         Class.forName("org.postgresql.Driver");
-        conn = DriverManager.getConnection(USERNAME,PASSWORD, URL);
-       // conn = DriverManager.getConnection("postgres","wh", "jdbc:postgresql://localhost:5432/waiyatdb");
+        Connection conn = DriverManager.getConnection(USERNAME,PASSWORD, URL);
+
+        //conn = DriverManager.getConnection("postgres","wh", "jdbc:postgresql://localhost:5432/waiyatdb");
         return conn;
     }
 
-    public static void connect() {
-        try {
-            myConnection();
-            System.out.println("Connection to Postgres has been established.");
 
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                    System.out.println("sql close");
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
 
     public void create(User user) {
         try{
@@ -87,9 +65,13 @@ public class postgresCRUD {
             cs.setString(8, user.getPassword());
             cs.executeUpdate();
 
-        }catch(SQLException | IOException | ClassNotFoundException e){
+        }catch(SQLException e){
             System.out.println(e.getMessage());
-        }finally {
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
             try {
                 if (conn != null) {
                     conn.close();
@@ -101,7 +83,7 @@ public class postgresCRUD {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         User user = new User();
         user.setFirstname("sunjae");
         user.setLastname("Ryu");
