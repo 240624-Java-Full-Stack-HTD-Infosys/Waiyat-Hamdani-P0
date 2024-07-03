@@ -36,10 +36,13 @@ public class postgresCRUD {
     }
 
 
-    public static Connection myConnection() throws SQLException{
+    public static Connection myConnection() throws SQLException, IOException, ClassNotFoundException {
         URL = (String)DB_PROPERTIES.get("url");
         USERNAME = (String) DB_PROPERTIES.get("uname");
         PASSWORD = (String) DB_PROPERTIES.get("pwd");
+
+
+        Class.forName("org.postgresql.Driver");
         conn = DriverManager.getConnection(USERNAME,PASSWORD, URL);
        // conn = DriverManager.getConnection("postgres","wh", "jdbc:postgresql://localhost:5432/waiyatdb");
         return conn;
@@ -53,8 +56,11 @@ public class postgresCRUD {
         }catch (SQLException e){
             System.out.println(e.getMessage());
 
-        }
-        finally {
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
             try {
                 if (conn != null) {
                     conn.close();
@@ -81,7 +87,7 @@ public class postgresCRUD {
             cs.setString(8, user.getPassword());
             cs.executeUpdate();
 
-        }catch(SQLException e){
+        }catch(SQLException | IOException | ClassNotFoundException e){
             System.out.println(e.getMessage());
         }finally {
             try {
