@@ -1,43 +1,29 @@
 package com.revature;
 
-import com.revature.Database.PostgresCRUD;
-import com.revature.Service.User;
-
-import java.sql.SQLException;
+import com.revature.Database.UserCRUD;
+import com.revature.models.User;
 
 public class Driver {
     public static void main(String[] args)  {
-        PostgresCRUD pgcrud = new PostgresCRUD();
-        pgcrud.create(new User("test", "testlast", "type", "5185555555", "2 way st", 100, "test@email.com", 5.55, "password"));
+
+        User waiyat = new User();
+        waiyat.setFirstname("waiyat");
+        waiyat.setLastname("hamdani");
+        waiyat.setPhone("2033334444");
+        waiyat.setAddress("1 way st , I wish ,south korea");
+        waiyat.setEmail("wyth@lovelyrunner.com");
+
+        UserCRUD userdao = new UserCRUD();
+        //userdao.create(waiyat);
+        //userdao.delete(1);
+        //userdao.updateEmailbyId("everyguyissomeonesunjae@gmail.com",1);
+        //userdao.updateAddressbyId("1 lovely runner st , timetravel ,south korea", 1);
+        //userdao.updatePhonebyId("222-333-4444",1);
+        //userdao.updateLastnamebyId("HAMDANI",1);
+        //userdao.updateFirstnamebyId("WAIYAT",1);
+        System.out.println(userdao.read(1));
 
 
 
-
-
-
-
-
-//        Class.forName("org.postgresql.Driver");
-//        Connection conn = DriverManager.getConnection(USERNAME,PASSWORD, URL);
-
-//        postgresCRUD testpostgress = new postgresCRUD();
-
-        //String firstname, String lastname, String typeUser, String phone,
-        //String address, int userId, String email, double balance, String password
-
-        //testpostgress.create(new User("test", "testlast", "type", "5185555555", "2 way st", 100, "test@email.com", 5.55, "password"));
-
-//        User user = new User();
-//        user.setFirstname("sunjae");
-//        user.setLastname("Ryu");
-//        user.setTypeUser(String.valueOf(AdminOrUser.CLIENT));
-//        user.setAddress("14, Hwaseomun-ro 48beon-gil, Paldal-gu, Suwon-si, Gyeonggi-do");
-//        user.setEmail("sunjaeimsol@llr.net");
-//        user.setPhone("4445556666");
-//        user.setBalance(9999);
-//        user.setPassword("loveimsol");
-//
-//        postgresCRUD testpostgress = new postgresCRUD();
-//        testpostgress.create(user);
     }
 }

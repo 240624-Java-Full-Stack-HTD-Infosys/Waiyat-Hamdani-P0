@@ -1,3 +1,97 @@
+This project 
+
+
+My Plan:
+user -------->             account        
+	          |	     |                 |
+	          v          v                 V
+             withdraw       deposit          transfer
+
+
+
+user:
+firstname 
+lastname
+phone 
+address
+userid
+email
+
+
+account: 
+username
+password
+accounted
+balance
+accounttype
+userid
+
+
+withdrawal:
+accounted
+date
+ammountwithdrawal
+withdrawid
+
+
+deposit:
+depositid 
+date
+amount deposit
+accountid
+
+
+Transfer
+transferid
+from_accountid
+to_accountid
+amount
+date
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Cheat Cheat
 
 
@@ -7,22 +101,36 @@ mvn compile
 
 Database SQL lite
 
-Create Table in sql lite-
+CREATE TABLE userwbank
+(
+userid SERIAL PRIMARY KEY NOT NULL,
+firstname VARCHAR(45) NOT NULL,
+lastname VARCHAR(45) NOT NULL,
+phone VARCHAR(19),
+address VARCHAR(80),
+email VARCHAR(50),
+accountid INT,
+FOREIGN KEY (accountid) REFERENCES accountwbank(accountid)
+);
 
-create table wbank(Id SERIAL PRIMARY KEY NOT NULL,
-Firstname VARCHAR(30) NOT NULL,
-Lastname VARCHAR(30) NOT NULL,
-TypeOfUser VARCHAR(30)NOT NULL,
-Email VARCHAR(30),
-Address VARCHAR(50),
-Phone VARCHAR(15),
-Balance DECIMAL (15,2),
-Password VARCHAR(30) NOT NULL );
+CREATE TABLE accountwbank
+(
+username VARCHAR(100),
+password VARCHAR(100),
+account_id INT PRIMARY KEY,
+balance DECIMAL(14, 2),
+account_type VARCHAR(50),
+userid INT,
+FOREIGN KEY (userid) REFERENCES userwbank(userid)
+);
 
-
-Insert just the Admin to that table --
-INSERT INTO wbank (Firstname,Lastname,TypeOfUser,Email,Address,Phone,Balance,Password)
-values ('Waiyat', 'Hamdani','ADMIN','waiyat@imsol.com','1 lovelyrunner st' ,'203-111-2222', 999999,'admin');
+CREATE TABLE withdrawalwbank (
+withdrawid INT PRIMARY KEY,
+accountid INT,
+date DATE,
+amountwithdrawal DECIMAL(10, 2),
+FOREIGN KEY (accountid) REFERENCES accountwbank(accountid)
+);
 
 select --
 select * from wbank;
