@@ -67,15 +67,14 @@ public class User {
         this.Email = email;
     }
 
-
     @Override
     public String toString() {
         return "User{" +
-                "Firstname='" + Firstname + '\'' +
+                "userId=" + userId +
+                ", Firstname='" + Firstname + '\'' +
                 ", Lastname='" + Lastname + '\'' +
                 ", Phone='" + Phone + '\'' +
                 ", Address='" + Address + '\'' +
-                ", userId=" + userId +
                 ", Email='" + Email + '\'' +
                 '}';
     }

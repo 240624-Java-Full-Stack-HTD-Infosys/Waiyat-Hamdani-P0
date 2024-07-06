@@ -85,4 +85,66 @@ public class AccountCRUD {
     }
 
 
+    public boolean updatePasswordbyEmail( String newPassword,String email) {
+        boolean isupdate =false;
+        User user = new User();
+        try{
+            Connection conn = ConnectionUtil.getConnection();
+            String query = "UPDATE accountwbank SET password = ? WHERE userid = (SELECT userid FROM userwbank WHERE email = ?)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, newPassword);
+            pstmt.setString(2, email);
+            int affectedrow = pstmt.executeUpdate();
+            if(affectedrow ==1){
+                isupdate=true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    System.out.println("sql close");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return isupdate;
+    }
+
+
+    public boolean delete(Integer id) {
+        boolean isDeleted = false;
+        try {
+            Connection conn = ConnectionUtil.getConnection();
+            String query = "DELETE FROM accountwbank WHERE userid = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            int affectedRow = pstmt.executeUpdate();
+            if (affectedRow == 1) {
+                isDeleted = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    System.out.println("sql close");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return isDeleted;
+    }
 }
