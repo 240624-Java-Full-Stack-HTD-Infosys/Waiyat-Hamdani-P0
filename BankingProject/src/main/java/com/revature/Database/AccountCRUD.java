@@ -14,9 +14,6 @@ import java.util.Properties;
 public class AccountCRUD {
     private static Properties DB_PROPERTIES;
     private static Connection conn;
-    private static String URL;
-    private static String USERNAME;
-    private static String PASSWORD;
 
     public void create(Account account) {
         try{
@@ -181,4 +178,36 @@ public class AccountCRUD {
 
         return balanceacc;
     }
+
+    public Boolean UpdateBalance(double newbalance , int accountid){
+        Boolean isupdate = false;
+        try{
+            Connection conn = ConnectionUtil.getConnection();
+            String query = "UPDATE accountwbank SET balance = ? WHERE accountid = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setDouble(1, newbalance);
+            pstmt.setInt(2, accountid);
+            int affectedrow = pstmt.executeUpdate();
+            if(affectedrow ==1){
+                isupdate=true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    System.out.println("sql close");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return isupdate;
+    }
+
 }

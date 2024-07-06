@@ -25,7 +25,7 @@ public class Withdrawal {
 
     public void setAccountId(int accountId) {this.accountId = accountId;}
 
-    public Date getDate() {return date;}
+    public java.sql.Date getDate() {return (java.sql.Date) date;}
 
     public void setDate(Date date) {this.date = date;}
 
