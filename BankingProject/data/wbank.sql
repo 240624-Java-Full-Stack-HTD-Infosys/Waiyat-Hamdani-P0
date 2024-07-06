@@ -1,8 +1,9 @@
--- just in case if something wrong on table
---drop table userwbank;
---drop table accountwbank;
---drop table withdrawalwbank;
---drop table transferwbank;
+--just in case if something wrong on table
+drop table userwbank;
+drop table accountwbank;
+drop table depositwbank;
+drop table withdrawalwbank;
+drop table transferwbank;
 
 CREATE TABLE userwbank
 (
@@ -16,9 +17,9 @@ email VARCHAR(50)
 
 CREATE TABLE accountwbank
 (
+	accountid SERIAL PRIMARY key,
     username VARCHAR(100),
     password VARCHAR(100),
-    accountid INT PRIMARY KEY,
     balance DECIMAL(14, 2),
     accounttype VARCHAR(50),
     userid INT,
@@ -26,7 +27,7 @@ CREATE TABLE accountwbank
 );
 
 CREATE TABLE withdrawalwbank (
-    withdrawid INT PRIMARY KEY,
+    withdrawid SERIAL PRIMARY KEY,
     accountid INT,
     date DATE,
     amountwithdrawal DECIMAL(10, 2),
@@ -34,7 +35,7 @@ CREATE TABLE withdrawalwbank (
 );
 
 CREATE TABLE depositwbank (
-    depositid INT PRIMARY KEY,
+    depositid SERIAL PRIMARY KEY,
     accountid INT,
     date DATE,
     amountdeposit DECIMAL(10, 2),
@@ -53,12 +54,15 @@ CREATE TABLE transferwbank
     FOREIGN KEY (to_accountid) REFERENCES accountwbank(accountid)
 );
 
-INSERT INTO wbank (Firstname,Lastname,TypeOfUser,Email,Address,Phone,Balance,Password)
-values ('Waiyat', 'Hamdani','ADMIN','waiyat@imsol.com','1 lovelyrunner st' ,'203-111-2222', 999999,'admin'); 
 
 select * from userwbank;
+select * from accountwbank;
+select * from depositwbank;
+select * from withdrawalwbank;
+select * from transferwbank;
 
 
-
+select * from userwbank u 
+join accountwbank a on u.userid  = a.userid ;
 
 COMMIT;

@@ -2,51 +2,18 @@ This project
 
 
 My Plan:
-user -------->             account        
-	          |	     |                 |
-	          v          v                 V
-             withdraw       deposit          transfer
+user -------->               account     ->withdraw
+                                         ->deposit
+                                         ->transfer  
 
 
+user:userid, firstname ,lastname ,phone ,address ,email
 
-user:
-firstname 
-lastname
-phone 
-address
-userid
-email
+account: Account id ,username ,password ,balance ,accounttype ,userid
 
-
-account: 
-username
-password
-accounted
-balance
-accounttype
-userid
-
-
-withdrawal:
-accounted
-date
-ammountwithdrawal
-withdrawid
-
-
-deposit:
-depositid 
-date
-amount deposit
-accountid
-
-
-Transfer
-transferid
-from_accountid
-to_accountid
-amount
-date
+withdrawal:accounted ,date ,ammountwithdrawal ,withdrawid
+deposit:depositid ,date ,amount_deposit ,accountid
+Transfer :transferid ,from_accountid ,to_accountid ,amount ,date
 
 
 
@@ -57,61 +24,16 @@ date
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+use prostgress (for database , Java for main language)
 
 
 
 Cheat Cheat
-
-
 To compile the maven
 mvn compile
 
 
-Database SQL lite
-
-CREATE TABLE userwbank
-(
-userid SERIAL PRIMARY KEY NOT NULL,
-firstname VARCHAR(45) NOT NULL,
-lastname VARCHAR(45) NOT NULL,
-phone VARCHAR(19),
-address VARCHAR(80),
-email VARCHAR(50),
-accountid INT,
-FOREIGN KEY (accountid) REFERENCES accountwbank(accountid)
-);
+Database SQL 
 
 CREATE TABLE accountwbank
 (
@@ -122,14 +44,6 @@ balance DECIMAL(14, 2),
 account_type VARCHAR(50),
 userid INT,
 FOREIGN KEY (userid) REFERENCES userwbank(userid)
-);
-
-CREATE TABLE withdrawalwbank (
-withdrawid INT PRIMARY KEY,
-accountid INT,
-date DATE,
-amountwithdrawal DECIMAL(10, 2),
-FOREIGN KEY (accountid) REFERENCES accountwbank(accountid)
 );
 
 select --
