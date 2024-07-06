@@ -10,9 +10,9 @@ import java.util.Properties;
 public class ConnectionUtil {
     public static Connection getConnection() throws IOException, SQLException, ClassNotFoundException {
         //---------------------------------local database---------------------------------------------------------------------
-        // InputStream inputStream = ConnectionUtil.class.getClassLoader().getResourceAsStream("databaseLocale.properties");
+         InputStream inputStream = ConnectionUtil.class.getClassLoader().getResourceAsStream("databaseLocale.properties");
         //---------------------------------group2 database---------------------------------------------------------------------
-        InputStream inputStream = ConnectionUtil.class.getClassLoader().getResourceAsStream("databaseg2.properties");
+        //InputStream inputStream = ConnectionUtil.class.getClassLoader().getResourceAsStream("databaseg2.properties");
         Properties props = new Properties();
         props.load(inputStream);
         Class.forName("org.postgresql.Driver");

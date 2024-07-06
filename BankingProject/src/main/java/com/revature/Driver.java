@@ -9,18 +9,20 @@ import com.revature.models.User;
 public class Driver {
     public static void main(String[] args)  {
 
-      //  Account waiyatacc = new Account();
+       // Account waiyatacc = new Account();
       //  waiyatacc.setUsername("waiyatoppa");
        // waiyatacc.setPassword("admin");
        // waiyatacc.setBalance(999999.89);
        // waiyatacc.setAccountType(CheckingSavingCredit.CHECKING.toString());
        // waiyatacc.setUserId(1);
 
-       // AccountCRUD wacc = new AccountCRUD();
+        AccountCRUD wacc = new AccountCRUD();
         //wacc.create(waiyatacc);
         ////wacc.delete(1);
         //wacc.updatePasswordbyEmail("lesserafim","everyguyissomeonesunjae@gmail.com");
-       // System.out.println(wacc.read(1));
+        //System.out.println(wacc.read(1));
+        System.out.println(wacc.getBalance(1));
+
 
 
 

@@ -118,6 +118,8 @@ public class AccountCRUD {
     }
 
 
+
+
     public boolean delete(Integer id) {
         boolean isDeleted = false;
         try {
@@ -146,5 +148,37 @@ public class AccountCRUD {
             }
         }
         return isDeleted;
+    }
+
+
+    public Double getBalance(int accountid){
+        Double balanceacc = null;
+        try{
+            Connection conn = ConnectionUtil.getConnection();
+            String query = "select balance from accountwbank where accountid= ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,accountid);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                balanceacc=rs.getDouble("balance");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    System.out.println("sql close");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return balanceacc;
     }
 }
