@@ -1,6 +1,6 @@
 package com.revature.Service;
 
-public class DepositWithdrawMoney {
+public class DepositWithdrawMoneyService {
     private static double currentMoney;
     private static double finalmoney;
 
@@ -30,11 +30,9 @@ public class DepositWithdrawMoney {
     public static double getCurrentMoney() {
         return currentMoney;
     }
-
     public static void setCurrentMoney(double cm) {
         currentMoney = cm;
     }
-
     public static double getFinalmoney() {
         return finalmoney;
     }

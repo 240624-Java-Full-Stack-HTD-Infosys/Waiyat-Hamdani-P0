@@ -12,14 +12,14 @@ firstname VARCHAR(45) NOT NULL,
 lastname VARCHAR(45) NOT NULL,
 phone VARCHAR(19),
 address VARCHAR(80),
-email VARCHAR(50) UNIQUE
+email VARCHAR(50) UNIQUE,
+username VARCHAR(100) unique NOT NULL,
+password VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE accountwbank
 (
 	accountid SERIAL PRIMARY key,
-    username VARCHAR(100),
-    password VARCHAR(100),
     balance DECIMAL(14, 2),
     accounttype VARCHAR(50),
     userid INT,
@@ -60,6 +60,7 @@ select * from accountwbank;
 select * from depositwbank;
 select * from withdrawalwbank;
 select * from transferwbank;
+
 
 
 select * from userwbank u 

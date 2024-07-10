@@ -18,19 +18,12 @@ public class Withdrawal {
     }
 
     public int getWithdrawId() {return withdrawId;}
-
     public void setWithdrawId(int withdrawId) {this.withdrawId = withdrawId;}
-
     public int getAccountId() {return accountId;}
-
     public void setAccountId(int accountId) {this.accountId = accountId;}
-
     public java.sql.Date getDate() {return (java.sql.Date) date;}
-
     public void setDate(Date date) {this.date = date;}
-
     public double getAmountWithdrawal() {return amountWithdrawal;}
-
     public void setAmountWithdrawal(double amountWithdrawal) {this.amountWithdrawal = amountWithdrawal;}
 
     @Override

@@ -1,53 +1,69 @@
-This project 
+All Syntax
+===================login===============
+Login account   <http://localhost:8080/login>
+{
+"username":" ",
+"password":" "
+}
+
+=====================register ====================
+Register User/ New account <
+{
+"user": {
+"firstname": " ",
+"lastname": " ",
+"phone": " ",
+"address": " ",
+"email": " ",
+"username": " ",
+"password": " "
+},
+"account":
+{
+"balance": 20,
+"accountType": " "
+}
+}
 
 
-My Plan:
-user -------->               account     ->withdraw
-                                         ->deposit
-                                         ->transfer  
+we do have root /  <http://localhost:8080/>
+to reset the server funny everytime register account it store to database but it dont do login
+.the postman not ready to take it
+
+===========Account stuff  (in here has to be login first) ===============
+authentication after login <http://localhost:8080/auth>
+
+Deposit <http://localhost:8080/auth/deposit>
+{
+"amountDeposit": 3000
+}
+
+Withdraw <http://localhost:8080/auth/withdraw>
+{
+"amountWithdrawal": 3000
+}
+
+transfer <http://localhost:8080/auth/transfer>
+{
+"toAccountId":2,
+"amount": 3000
+}
+
+Create Extra account <http://localhost:8080/auth/createExtraAccount>
+{
+"balance": 2000.0,
+"accountType": "saving"
+}
+
+delete account <http://localhost:8080/auth/deleteAccount>
+{
+"accountId": 3
+}
 
 
-user:userid, firstname ,lastname ,phone ,address ,email
-
-account: Account id ,username ,password ,balance ,accounttype ,userid
-
-withdrawal:accounted ,date ,ammountwithdrawal ,withdrawid
-deposit:depositid ,date ,amount_deposit ,accountid
-Transfer :transferid ,from_accountid ,to_accountid ,amount ,date
 
 
+====================================in account ================================
 
-
-
-
-
-
-
-
-use prostgress (for database , Java for main language)
-
-
-
-Cheat Cheat
-To compile the maven
-mvn compile
-
-
-Database SQL 
-
-CREATE TABLE accountwbank
-(
-username VARCHAR(100),
-password VARCHAR(100),
-account_id INT PRIMARY KEY,
-balance DECIMAL(14, 2),
-account_type VARCHAR(50),
-userid INT,
-FOREIGN KEY (userid) REFERENCES userwbank(userid)
-);
-
-select --
-select * from wbank;
-
-just to save the file -
-.save BankingWaiyatSystem.db
+ERD is on ERD Image 
+to see Powerpoint should be under Waiyat project-0

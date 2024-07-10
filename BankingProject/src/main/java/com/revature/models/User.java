@@ -2,80 +2,83 @@ package com.revature.models;
 
 public class User {
     private int userId;
-    private String Firstname;
-    private String Lastname;
-    private String Phone;
-    private String Address;
-    private String Email;
+    private String firstname;
+    private String lastname;
+    private String phone;
+    private String address;
+    private String email;
+    private String username;
+    private String password;
 
     public User(){}
 
-    public User(String firstname, String lastname, String typeUser, String phone, String address, int userId, String email, double balance, String password) {
-        Firstname = firstname;
-        Lastname = lastname;
-        Phone = phone;
-        Address = address;
+    public User(int userId, String firstname, String lastname, String phone, String address, String email, String username, String password) {
         this.userId = userId;
-        Email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phone = phone;
+        this.address = address;
+        this.email = email;
+        this.username = username;
+        this.password = password;
     }
 
     public String getFirstname() {
-        return Firstname;
+        return firstname;
     }
 
     public void setFirstname(String firstname) {
-        Firstname = firstname;
+        this.firstname = firstname;
     }
 
     public String getLastname() {
-        return Lastname;
+        return lastname;
     }
 
     public void setLastname(String lastname) {
-        Lastname = lastname;
+        this.lastname = lastname;
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
-
     public void setPhone(String phone) {
-        Phone = phone;
+        this.phone = phone;
     }
-
     public String getAddress() {
-        return Address;
+        return address;
     }
-
     public void setAddress(String address) {
-        this.Address = address;
+        this.address = address;
     }
-
     public int getUserId() {
         return userId;
     }
-
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
     public String getEmail() {
-        return Email;
+        return email;
     }
-
     public void setEmail(String email) {
-        this.Email = email;
+        this.email = email;
     }
+    public String getUsername() {return username;}
+    public void setUsername(String username) {this.username = username;}
+    public String getPassword() {return password;}
+    public void setPassword(String password) {this.password = password;}
 
     @Override
     public String toString() {
         return "User{" +
                 "userId=" + userId +
-                ", Firstname='" + Firstname + '\'' +
-                ", Lastname='" + Lastname + '\'' +
-                ", Phone='" + Phone + '\'' +
-                ", Address='" + Address + '\'' +
-                ", Email='" + Email + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
