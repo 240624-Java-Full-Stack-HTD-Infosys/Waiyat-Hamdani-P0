@@ -26,9 +26,6 @@ Register User/ New account <
 }
 
 
-we do have root /  <http://localhost:8080/>
-to reset the server funny everytime register account it store to database but it dont do login
-.the postman not ready to take it
 
 ===========Account stuff  (in here has to be login first) ===============
 authentication after login <http://localhost:8080/auth>

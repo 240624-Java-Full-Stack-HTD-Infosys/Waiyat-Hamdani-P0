@@ -25,21 +25,17 @@ public class UserController {
     private static UserCRUD udao = new UserCRUD();
     private static  User user ;
     private static Account account ;
-    private static HashMap<String ,String> userpass;
     private AccountController ac;
 
     public UserController(Javalin api, AccountService accountService) {
         this.api = api;
         this.accountService = accountService;
-        userpass = udao.readAllUsernamePass();
-        api.post("/",this::reseting);
         api.get("/login",this::login);
         api.get("/register",this::register);
     }
 
-
-
     public User login(Context ctx)  {
+        HashMap<String ,String> userpass = udao.readAllUsernamePass();
         //to expire the cookies
         Cookie expiredCookie = new Cookie("AuthStringId", "");
         expiredCookie.setMaxAge(0); // Set the cookie to expire immediately
@@ -94,14 +90,6 @@ public class UserController {
         }
 
     }
-    private void reseting(Context ctx) {
-        JavalinUtil.restartServer();
-        ctx.redirect("/hello");
-        api.post("/hello",this::welcometobank);
-    }
-    private void welcometobank(Context context) {
-        context.result(AsciiUtil.bankAsci());
-        context.status(200);
-    }
+
 
 }

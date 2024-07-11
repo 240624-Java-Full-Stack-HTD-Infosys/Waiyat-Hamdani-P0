@@ -3,7 +3,7 @@ package com.revature.controller;
 import com.revature.Database.*;
 import com.revature.Service.AccountService;
 import com.revature.Service.AsciiUtil;
-import com.revature.controller.dto.AccountIdDTO;
+import com.revature.controller.dto.*;
 import com.revature.models.*;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -32,6 +32,91 @@ public class AccountController {
         api.get("/auth/transfer",this::transfer);
         api.get("/auth/createExtraAccount",this::create);
         api.get("/auth/deleteAccount",this::delete);
+        api.get("/auth/changeEmail", this::changeemail);
+        api.get("/auth/changePhone",this::changephone);
+        api.get("/auth/changeAddress",this::changeAddress);
+        api.get("/auth/changeFirstname",this::changeFirstname);
+        api.get("/auth/changeLastname",this::changeLastname);
+    }
+
+    private void changeLastname(Context ctx) {
+        UserCRUD udao = new UserCRUD();
+        try{
+            String authStringUserId= ctx.cookie("AuthStringId");
+            user = udao.read(Integer.parseInt(authStringUserId));
+            LastnameChangeDto lastnamecd = ctx.bodyAsClass(LastnameChangeDto.class);
+            udao.updateFirstnamebyId(lastnamecd.getNewLastname(), user.getUserId());
+            user.setLastname(lastnamecd.getNewLastname());
+            ctx.json(user);
+            ctx.status(200);
+        }catch (Exception e){
+            ctx.status(400);
+            e.printStackTrace();
+        }
+    }
+
+    private void changeFirstname(Context ctx) {
+        UserCRUD udao = new UserCRUD();
+        try{
+            String authStringUserId= ctx.cookie("AuthStringId");
+            user = udao.read(Integer.parseInt(authStringUserId));
+            FirstnameChangeDto firstnamecd = ctx.bodyAsClass(FirstnameChangeDto.class);
+            udao.updateFirstnamebyId(firstnamecd.getNewFirstname(), user.getUserId());
+            user.setFirstname(firstnamecd.getNewFirstname());
+            ctx.json(user);
+            ctx.status(200);
+        }catch (Exception e){
+            ctx.status(400);
+            e.printStackTrace();
+        }
+    }
+
+    private void changeAddress(Context ctx) {
+        UserCRUD udao = new UserCRUD();
+        try{
+            String authStringUserId= ctx.cookie("AuthStringId");
+            user = udao.read(Integer.parseInt(authStringUserId));
+            AddressChangeDto addcd = ctx.bodyAsClass(AddressChangeDto.class);
+            udao.updateAddressbyId(addcd.getNewAddress(), user.getUserId());
+            user.setAddress(addcd.getNewAddress());
+            ctx.json(user);
+            ctx.status(200);
+        }catch (Exception e){
+            ctx.status(400);
+            e.printStackTrace();
+        }
+    }
+
+    private void changephone(Context ctx) {
+        UserCRUD udao = new UserCRUD();
+        try{
+            String authStringUserId= ctx.cookie("AuthStringId");
+            user = udao.read(Integer.parseInt(authStringUserId));
+            PhoneChangeDto phonecd = ctx.bodyAsClass(PhoneChangeDto.class);
+            udao.updatePhonebyId(phonecd.getNewPhone(), user.getUserId());
+            user.setPhone(phonecd.getNewPhone());
+            ctx.json(user);
+            ctx.status(200);
+        }catch (Exception e){
+            ctx.status(400);
+            e.printStackTrace();
+        }
+    }
+
+    private void changeemail(Context ctx) {
+        UserCRUD udao = new UserCRUD();
+        try {
+            String authStringUserId= ctx.cookie("AuthStringId");
+            user = udao.read(Integer.parseInt(authStringUserId));
+            EmailChangeDto emailcd = ctx.bodyAsClass(EmailChangeDto.class);
+            udao.updateEmailbyId(emailcd.getNewEmail(),user.getUserId());
+            user.setEmail(emailcd.getNewEmail());
+            ctx.json(user);
+            ctx.status(200);
+        }catch (Exception e){
+            ctx.status(400);
+            e.printStackTrace();
+        }
     }
 
     private void create(Context ctx) {
@@ -188,23 +273,14 @@ public class AccountController {
                 "\n to deposit: add /deposit  " +
                 "\n to withdraw: add /withdraw  " +
                 "\n to transfer: add /transfer" +
-                "\n to create extra account :  add /extraaccount" +
-                "\n to create delete an account: add/minusaccount" +
+                "\n to create extra account :  add /createExtraAccount" +
+                "\n to create delete an account: add /deleteAccount" +
                 "\n"
                 + AsciiUtil.bankAsci());
 
         System.out.println("the user :" +user.getFirstname() + "succesfully welcome");
         System.out.println(AsciiUtil.bankAsci());
     }
-
-
-
-
-//    public static User getUser() {return user;}
-//    public static void setUser(User user) {AccountController.user = user;}
-//    public static Account getAccount() {return account;}
-//    public static void setAccount(Account account) {AccountController.account = account;}
-
 
 
 }

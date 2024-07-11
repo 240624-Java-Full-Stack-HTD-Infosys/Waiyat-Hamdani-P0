@@ -64,6 +64,9 @@ select * from transferwbank;
 
 
 select * from userwbank u 
-join accountwbank a on u.userid  = a.userid ;
+join accountwbank a on u.userid  = a.userid 
+order by u.userid asc ;
+
+select * from userwbank u join accountwbank a 
 
 COMMIT;
