@@ -67,6 +67,26 @@ select * from userwbank u
 join accountwbank a on u.userid  = a.userid 
 order by u.userid asc ;
 
+
+SELECT 
+    a.accountid,
+    w.amountwithdrawal,
+    d.amountdeposit,
+    w.date AS withdrawdate,
+    d.date AS depositdate
+FROM 
+    accountwbank a 
+LEFT JOIN 
+    (SELECT accountid, amountdeposit, date FROM depositwbank) d 
+ON 
+    a.accountid = d.accountid 
+LEFT JOIN  
+    (SELECT accountid, amountwithdrawal, date FROM withdrawalwbank) w 
+ON 
+    a.accountid = w.accountid 
+WHERE 
+    a.userid = 1;
+   
 select * from userwbank u join accountwbank a 
 
 COMMIT;

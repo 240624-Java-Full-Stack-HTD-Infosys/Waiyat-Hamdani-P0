@@ -8,6 +8,7 @@ import com.revature.models.*;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -37,6 +38,24 @@ public class AccountController {
         api.get("/auth/changeAddress",this::changeAddress);
         api.get("/auth/changeFirstname",this::changeFirstname);
         api.get("/auth/changeLastname",this::changeLastname);
+        api.post("/auth/history",this::history);
+    }
+
+    private void history(Context ctx) {
+        JoinCrud jdao = new JoinCrud();
+        UserCRUD udao = new UserCRUD();
+
+        try{
+            String authStringUserId= ctx.cookie("AuthStringId");
+            user = udao.read(Integer.parseInt(authStringUserId));
+            ArrayList<BankAccountDetails> details = jdao.readAlldetails(user.getUserId());
+            System.out.println(details);
+            ctx.json(details);
+            ctx.status(200);
+        }catch (Exception e){
+            ctx.status(400);
+            e.printStackTrace();
+        }
     }
 
     private void changeLastname(Context ctx) {
