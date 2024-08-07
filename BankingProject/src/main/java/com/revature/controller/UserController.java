@@ -46,13 +46,9 @@ public class UserController {
         if(AccountService.isUsernameandPasswordExist(userpass,auth.getUsername(),auth.getPassword())){
             user = udao.read(auth.getUsername());
             System.out.println(user);
-            // AccountController.setUser(user);
-            // ctx.redirect("/auth");
-            // Try use cookie instead ============
-            // String userJson = new Gson().toJson(user);
             Cookie cookie = new Cookie("AuthStringId", Integer.toString(user.getUserId()));
             ctx.cookie(cookie);
-            //Try use cookie instead ============
+
 
             ctx.json(user);
             ctx.status(200);
@@ -68,7 +64,7 @@ public class UserController {
     public void register(Context ctx){
         //to expire the cookies
         Cookie expiredCookie = new Cookie("AuthStringId", "");
-        expiredCookie.setMaxAge(0); // Set the cookie to expire immediately
+        expiredCookie.setMaxAge(0);
         ctx.cookie(expiredCookie);
         // to expire the cookies
         try {

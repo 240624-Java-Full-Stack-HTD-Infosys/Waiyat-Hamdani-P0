@@ -87,6 +87,6 @@ ON
 WHERE 
     a.userid = 1;
    
-select * from userwbank u join accountwbank a 
+
 
 COMMIT;

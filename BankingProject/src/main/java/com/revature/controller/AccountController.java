@@ -223,10 +223,11 @@ public class AccountController {
         DepositCrud ddao = new DepositCrud();
         try{
             String authStringUserId= ctx.cookie("AuthStringId");
-            user = udao.read(Integer.parseInt(authStringUserId));  // decided not to use cookies
+            user = udao.read(Integer.parseInt(authStringUserId));
             account =adao.read(user.getUserId());
             Deposit auth = ctx.bodyAsClass(Deposit.class);
-            if (auth.getAmountDeposit() <= 0) {      // if this 0 or negative return false
+            // if this 0 or negative return false
+            if (auth.getAmountDeposit() <= 0) {
                 ctx.status(400);
                 ctx.result("Invalid deposit amount. Amount cannot be Zero or negative.");
                 return;
@@ -254,11 +255,11 @@ public class AccountController {
             Date utilDate = new Date();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             String authStringUserId= ctx.cookie("AuthStringId");
-            user = udao.read(Integer.parseInt(authStringUserId)); //  to used cookies
+            user = udao.read(Integer.parseInt(authStringUserId));
             account =adao.read(user.getUserId());
             Withdrawal auth = ctx.bodyAsClass(Withdrawal.class);
-
-            if (auth.getAmountWithdrawal() <= 0) {      // if this 0 or negative return false
+            // if this 0 or negative return false
+            if (auth.getAmountWithdrawal() <= 0) {
                 ctx.status(400);
                 ctx.result("Invalid withdraw amount. Amount cannot be Zero or negative.");
                 return;
@@ -276,8 +277,6 @@ public class AccountController {
             ctx.status(400);
             e.printStackTrace();
         }
-
-        //ctx.json(auth);
     }
 
     private void welcome(Context ctx) {
