@@ -1,3 +1,5 @@
+Tech: Javalin and postgres
+
 All Syntax
 ===================login===============
 Login account   <http://localhost:8080/login>
